@@ -2,21 +2,18 @@
 
 # Raspberry Functions
 
-Buzzer_Code = 10
+Buzzer_Code = 1
 
-Drive_Code = 12
+Drive_Code = 2
 
-Servo_Turn_Up_Code = 14
-Servo_Turn_Middle_Code = 15
-Servo_Turn_Down_Code = 16
+Servo_Turn_Up_Code = 3
+Servo_Turn_Middle_Code = 4
+Servo_Turn_Down_Code = 5
 
-Flash_On_Code = 18
-Flash_Off_Code = 20
+Flash_On_Code = 6
+Flash_Off_Code = 7
 
-Get_Long_Code = 22
-Get_Lat_Code = 23
-
-Get_Gas_Code = 24
+Get_Gas_Code = 8
 
 # Arduino Confirmations
 

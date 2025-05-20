@@ -1,7 +1,7 @@
 import SerialMessenger
 
 
-SerialMessenger.send_int(2)
+SerialMessenger.Gas()
 
 
 # while True:

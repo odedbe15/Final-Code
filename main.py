@@ -98,3 +98,22 @@ while True:
     scan_id = scan_id + 1
     SerialMessenger.Wait_Until_NearWall()
     
+    
+    
+    
+    
+    
+    
+    
+    
+#####################################
+#need to change gps to get location from rpi    
+# def Get_Location():
+#     gpsSerial.reset_input_buffer()
+#     gpsSerial.reset_output_buffer()
+#     Lat = ser.read()
+#     ser.reset_input_buffer()
+#     ser.reset_output_buffer()
+#     ser.write(Constants.Get_Long_Code)
+#     Long = ser.read()
+#     return [Long,Lat]

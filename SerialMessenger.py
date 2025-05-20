@@ -3,7 +3,7 @@ from serial import Serial
 from waiting import wait
 import time
 
-ser = Serial(port="COM8", baudrate=9600)#TODO find port
+ser = Serial(port="COM6", baudrate=9600, timeout=5)#TODO find port
 time.sleep(2) # wait for the serial connection to be established
 # gpsSerial = Serial(port="/dev/serial0")
 
@@ -43,10 +43,22 @@ def Servo_Low():
     
     
 def Gas():
-    ser.reset_input_buffer()
-    ser.reset_output_buffer()
-    ser.write(Constants.Get_Gas_Code)
-    return ser.read()
+
+    send_int(Constants.Get_Gas_Code)
+    time.sleep(2)  # Give Arduino a short time to process and prepare response
+
+    if ser.in_waiting > 0:
+        received_string = ser.readline().decode('utf-8').strip()
+        if received_string.isdigit():
+            received_number = int(received_string)
+            print("Received gas reading:", received_number)
+            return received_number
+        else:
+            print(f"Received invalid gas data: '{received_string}'")
+            return 0
+    else:
+        print("No gas data received from Arduino.")
+        return 0
     
 def Wait_Until_NearWall():
     wait(lambda: wait_Condition(Constants.Near_Wall))
