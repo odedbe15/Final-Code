@@ -1,10 +1,13 @@
 import Constants
 from serial import Serial
 from waiting import wait
+import time
+
+ser = Serial(port="COM8", baudrate=9600)#TODO find port
+time.sleep(2) # wait for the serial connection to be established
+# gpsSerial = Serial(port="/dev/serial0")
 
 
-ser = Serial(port="COM6")#TODO find port
-gpsSerial = Serial(port="/dev/serial0")
 
 def sendCode(code):
     ser.write(code)
@@ -36,15 +39,7 @@ def Servo_Middle():
 def Servo_Low():
     Send_Command(Constants.Servo_Turn_Down_Code,  3)
     
-def Get_Location():
-    gpsSerial.reset_input_buffer()
-    gpsSerial.reset_output_buffer()
-    Lat = ser.read()
-    ser.reset_input_buffer()
-    ser.reset_output_buffer()
-    ser.write(Constants.Get_Long_Code)
-    Long = ser.read()
-    return [Long,Lat]
+
     
     
 def Gas():
@@ -57,4 +52,10 @@ def Wait_Until_NearWall():
     wait(lambda: wait_Condition(Constants.Near_Wall))
     
 
-        
+def send_int(num):
+    char_to_send = str(num).encode("utf-8")
+    
+    ser.write(char_to_send)
+    print("Sent:", char_to_send)
+    
+    
