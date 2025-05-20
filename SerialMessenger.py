@@ -3,7 +3,7 @@ from serial import Serial
 from waiting import wait
 import time
 
-ser = Serial(port="COM6", baudrate=9600, timeout=5)#TODO find port
+ser = Serial(port="/dev/ttyUSB0", baudrate=9600, timeout=5)#TODO find port
 time.sleep(2) # wait for the serial connection to be established
 # gpsSerial = Serial(port="/dev/serial0")
 

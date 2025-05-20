@@ -1,7 +1,8 @@
 import SerialMessenger
 
-
-SerialMessenger.Gas()
+while True:
+	x= input("num:")
+	SerialMessenger.send_int(x)
 
 
 # while True:
