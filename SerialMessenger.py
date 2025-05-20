@@ -2,6 +2,7 @@ import Constants
 from serial import Serial
 from waiting import wait
 import time
+import pynmea2
 
 ser = Serial(port="/dev/ttyUSB0", baudrate=9600, timeout=5)#TODO find port
 time.sleep(2) # wait for the serial connection to be established
@@ -60,8 +61,27 @@ def Gas():
         print("No gas data received from Arduino.")
         return 0
     
-def Wait_Until_NearWall():
-    wait(lambda: wait_Condition(Constants.Near_Wall))
+
+# def Get_Location():
+#     str = ''
+#     try:
+#         str = gpsSerial.readline().decode().strip()
+#     except Exception as e:
+#         print("Error reading from GPS serial:", e)
+#         return None
+    
+#     if str.find("GGA") > 0:
+#         try:
+
+#             msg = pynmea2.parse(str)
+#             Lat = msg.latitude
+#             Long = msg.longitude
+#             print("Lat:", Lat, "Long:", Long)
+#             return Lat, Long
+#         except Exception as e:
+#             print("Error parsing NMEA message:", e)
+#             return None
+    
     
 
 def send_int(num):

@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <title>Field Robot Analysis</title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href={{css}}>
+
+        
+       <script>
+   
+
+        function initMap() {
+            // Your map initialization code here.  This is where you create the map object.
+            const myLatLng = { lat: {{lat}}, lng: {{long}} }; // Example coordinates
+            const map = new google.maps.Map(document.getElementById("map"), {  // "map" is the ID of your map container <div>
+                zoom: 15,
+                center: myLatLng,
+            });
+            const marker = new google.maps.Marker({
+                position: { lat: {{ lat }}, lng: {{ long }} },
+                map: map,
+            });
+        }
+       </script>
+        <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBBu7A9tY6X5AEm5MHcsN8ktghH4ZWuppQ&callback=initMap" async defer></script>
+        
+
+    </head>
+    <body class="container">
+       <h1 style="text-align: center;">Field Robot Analysis</h1>
+       
+       <h2>Gas Density Is : {{gas}}, which is {{is_gas}}</h2>
+        <img src={{img1}}>
+        <img src={{img2}}>
+        <img src={{img3}}>
+        
+        
+
+        <div id="map" style="height: 400px;"></div>
+
+        
+    
+    
+
+        
+        <script src="" async defer></script>
+        
+    </body>
+</html>

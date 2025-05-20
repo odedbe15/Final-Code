@@ -5,6 +5,7 @@ import os
 import VisionManager
 from datetime import date
 import pickle
+import time
 
 # Firebase init
 firebase_config = {{
@@ -76,6 +77,11 @@ def are_local_files():
 scan_id = 0                
 def Scan():
     SerialMessenger.Drive()
+    time.sleep(2)
+    SerialMessenger.Drive()
+    time.sleep(2)
+    SerialMessenger.Drive()
+    time.sleep(2)
     SerialMessenger.Servo_Middle()
     VisionManager.Take_First_Picture(scan_id,date.today())
     data = {"Gas": SerialMessenger.Gas(), "Location":SerialMessenger.Get_Location(), "Date":date.today() + " " + scan_id}
@@ -88,7 +94,6 @@ def Scan():
 # Start Up function
 if(is_connected()):
     are_local_files()
-SerialMessenger.Wait_Until_NearWall()
 ######################################
 
 
@@ -96,7 +101,6 @@ SerialMessenger.Wait_Until_NearWall()
 while True:
     Scan()
     scan_id = scan_id + 1
-    SerialMessenger.Wait_Until_NearWall()
     
     
     
