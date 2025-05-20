@@ -1,10 +1,15 @@
+#קובץ אחראי על עיבוד התמונה
+
 from ultralytics import YOLO
 import cv2
 import os
 import SerialMessenger
 
+#הגדרת המודל
 model = YOLO("C:\\Users\\User\\Desktop\\SchoolRobotics\\Vision\\leaf_obb.pt") 
 
+
+#פעולה המצלמת את התמונה הראשונה ובודקת אם יש צורך לצלם עוד
 def Take_First_Picture(id, time):
     detection_flag = False
     cap = cv2.VideoCapture(0)
@@ -41,7 +46,7 @@ def Take_First_Picture(id, time):
     else:
         return
         
-        
+#פעולה המצלמת את התמונה השנייה והשלישית   
 def Take_Picture(number, time):
     cap = cv2.VideoCapture(0)
     ret, frame = cap.read()

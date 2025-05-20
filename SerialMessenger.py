@@ -1,44 +1,38 @@
+# קובץ זה אחראי על התקשורת עם הארדואינו והג'י פי אס
+
 import Constants
 from serial import Serial
 from waiting import wait
 import time
 import pynmea2
 
-ser = Serial(port="/dev/ttyUSB0", baudrate=9600, timeout=5)#TODO find port
-time.sleep(2) # wait for the serial connection to be established
+ser = Serial(port="/dev/ttyUSB0", baudrate=9600, timeout=5)
+time.sleep(2) 
 # gpsSerial = Serial(port="/dev/serial0")
 
-
-
-def sendCode(code):
-    ser.write(code)
-
-def wait_Condition(code):
-    return ser.read() == code
-
-def Send_Command(messegeCode,timeout):
-    ser.reset_input_buffer()
-    ser.reset_output_buffer()
-    ser.write(messegeCode)
     
+def send_int(num):
+    char_to_send = str(num).encode("utf-8")
     
+    ser.write(char_to_send)
+    print("Sent:", char_to_send)
     
 
 
 def Buzz():
-    Send_Command(Constants.Buzzer_Code, 5)
+    send_int(Constants.Buzzer_Code)
 
 def Drive():
-    Send_Command(Constants.Drive_Code,3)
+    send_int(Constants.Drive_Code)
     
 def Servo_High():
-    Send_Command(Constants.Servo_Turn_Up_Code,3)
+    send_int(Constants.Servo_Turn_Up_Code)
     
 def Servo_Middle():
-    Send_Command(Constants.Servo_Turn_Middle_Code,3)
+    send_int(Constants.Servo_Turn_Middle_Code)
     
 def Servo_Low():
-    Send_Command(Constants.Servo_Turn_Down_Code,  3)
+    send_int(Constants.Servo_Turn_Down_Code)
     
 
     
@@ -84,10 +78,5 @@ def Gas():
     
     
 
-def send_int(num):
-    char_to_send = str(num).encode("utf-8")
-    
-    ser.write(char_to_send)
-    print("Sent:", char_to_send)
     
     

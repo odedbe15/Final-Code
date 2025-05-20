@@ -1,3 +1,6 @@
+
+
+#ספריות
 import SerialMessenger
 import socket
 import pyrebase
@@ -7,7 +10,7 @@ from datetime import date
 import pickle
 import time
 
-# Firebase init
+# הגדרות של פיירבייס
 firebase_config = {{
   "apiKey": "AIzaSyDNzmz-XuofVXxBkg_8YJ7RA-T3Tut86I8",
   "authDomain": "leaf-detector-robot.firebaseapp.com",
@@ -27,7 +30,7 @@ storage = firebase.storage()
 
 
 
-# Check connection  to the internet
+# בדיקת חיבור לאינטרנט
 def is_connected():
     try: 
         socket.create_connection(("8.8.8.8", 53))
@@ -38,7 +41,7 @@ def is_connected():
 ###################################
 
 
-# Check if there are local files avialable and then uploads them
+#בדיקה והעלאה של קבצים מקומיים
 def are_local_files():
     is_dir = False
     try:
@@ -73,7 +76,7 @@ def are_local_files():
 ######################################
 
 
-# Scan Function
+# פעולת הסריקה
 scan_id = 0                
 def Scan():
     SerialMessenger.Drive()
@@ -91,13 +94,13 @@ def Scan():
     
 
 
-# Start Up function
+# התעוררת
 if(is_connected()):
     are_local_files()
 ######################################
 
 
-# Main Loop
+# לולאה עיקרית
 while True:
     Scan()
     scan_id = scan_id + 1
