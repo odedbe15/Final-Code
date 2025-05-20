@@ -30,8 +30,8 @@ def Take_First_Picture(id, time):
                 class_name = result[0].names[class_id]
                 class_count[class_name] +=1
                 
-    if detections["Big Pest"] != 0:
-        SerialMessenger.Buzz()
+    # if detections["Big Pest"] != 0:
+    #     SerialMessenger.Buzz()
         
                 
     print( class_count)#TODO debugging

@@ -7,7 +7,7 @@ import VisionManager
 from datetime import date
 import pickle
 import time
-
+import random
 
 
 
@@ -28,10 +28,10 @@ def Scan():
     time.sleep(2)
     SerialMessenger.Drive()
     time.sleep(2)
-    SerialMessenger.Servo_Middle()
+    SerialMessenger.Servo_High()
     VisionManager.Take_First_Picture(scan_id,date.today())
-    data = {"Gas": SerialMessenger.Gas(), "Location":SerialMessenger.Get_Location(), "Date":date.today() + " " + scan_id}
-    with open("data" +date.today() + " " + scan_id +".json") as outfile:
+    data = {"Gas": SerialMessenger.Gas(), "Location":[random.random()* random.randrange(0,40),random.random()* random.randrange(0,40)], "Date":str(date.today()) + " " + str(scan_id)} 
+    with open("data/data " +str(date.today()) + " " + str(scan_id) +".json",'xb') as outfile:
         pickle.dump(data,outfile)
 #################################
     

@@ -1,17 +1,14 @@
 
 
 #ספריות
-import SerialMessenger
 import socket
 import pyrebase
 import os
-import VisionManager
-from datetime import date
 import pickle
-import time
+
 
 # הגדרות של פיירבייס
-firebase_config = {{
+firebase_config = {
   "apiKey": "AIzaSyDNzmz-XuofVXxBkg_8YJ7RA-T3Tut86I8",
   "authDomain": "leaf-detector-robot.firebaseapp.com",
   "projectId": "leaf-detector-robot",
@@ -21,7 +18,7 @@ firebase_config = {{
   "databaseURL":"https://leaf-detector-robot-default-rtdb.europe-west1.firebasedatabase.app/"
 }
     
-}
+
 
 firebase = pyrebase.initialize_app(firebase_config)
 database = firebase.database()
@@ -75,34 +72,14 @@ def are_local_files():
                 
 ######################################
 
-# פעולת הסריקה
-scan_id = 0                
-def Scan():
-    SerialMessenger.Drive()
-    time.sleep(2)
-    SerialMessenger.Drive()
-    time.sleep(2)
-    SerialMessenger.Drive()
-    time.sleep(2)
-    SerialMessenger.Servo_High()
-    VisionManager.Take_First_Picture(scan_id,date.today())
-    data = {"Gas": SerialMessenger.Gas(), "Location":[0,0], "Date":str(date.today()) + " " + str(scan_id)} 
-    with open("data/data " +str(date.today()) + " " + str(scan_id) +".json",'xb') as outfile:
-        pickle.dump(data,outfile)
-################################################################
-    
+
+
 
 
 # התעוררת
 if(is_connected()):
     are_local_files()
-######################################
 
-
-# לולאה עיקרית
-while True:
-    Scan()
-    scan_id = scan_id + 1
     
     
     
@@ -110,16 +87,3 @@ while True:
     
     
     
-    
-    
-#####################################
-#need to change gps to get location from rpi    
-# def Get_Location():
-#     gpsSerial.reset_input_buffer()
-#     gpsSerial.reset_output_buffer()
-#     Lat = ser.read()
-#     ser.reset_input_buffer()
-#     ser.reset_output_buffer()
-#     ser.write(Constants.Get_Long_Code)
-#     Long = ser.read()
-#     return [Long,Lat]

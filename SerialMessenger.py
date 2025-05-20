@@ -6,7 +6,7 @@ from waiting import wait
 import time
 import pynmea2
 
-ser = Serial(port="/dev/ttyUSB0", baudrate=9600, timeout=5)
+ser = Serial(port="COM6", baudrate=9600, timeout=5)
 time.sleep(2) 
 # gpsSerial = Serial(port="/dev/serial0")
 
@@ -39,7 +39,7 @@ def Servo_Low():
     
 def Gas():
 
-    send_int(Constants.Get_Gas_Code)
+    # send_int(Constants.Get_Gas_Code)
     time.sleep(2)  # Give Arduino a short time to process and prepare response
 
     if ser.in_waiting > 0:
