@@ -80,7 +80,7 @@ def are_local_files():
                 elif file.endswith(".png"):
                     Date = file.split(" ")[0] + " " + file.split(" ")[1]
                     storage.child(Date +  ".png").put("data/" + file)
-                    database.child("Uploads").child(Date).child("Img").push(storage.child(Date + ".png").get_url("AdFvNtPX7JfgfX6pD037Hhq5OfC2"))
+                    database.child("Uploads").child(Date).child("Img").push(storage.child(Date + ".png").get_url("hGfCMCZWsoSH4dMGPezut7GqaYU2"))
                     
                 os.remove("data/" + file)
                 
