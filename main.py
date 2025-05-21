@@ -11,7 +11,7 @@ import pickle
 import time
 
 # הגדרות של פיירבייס
-firebase_config = {{
+firebase_config = {
   "apiKey": "AIzaSyDNzmz-XuofVXxBkg_8YJ7RA-T3Tut86I8",
   "authDomain": "leaf-detector-robot.firebaseapp.com",
   "projectId": "leaf-detector-robot",
@@ -21,7 +21,7 @@ firebase_config = {{
   "databaseURL":"https://leaf-detector-robot-default-rtdb.europe-west1.firebasedatabase.app/"
 }
     
-}
+
 
 firebase = pyrebase.initialize_app(firebase_config)
 database = firebase.database()
