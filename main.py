@@ -111,7 +111,6 @@ while True:
     
     
     
-    
 #####################################
 #need to change gps to get location from rpi    
 # def Get_Location():

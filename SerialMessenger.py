@@ -34,6 +34,11 @@ def Servo_Middle():
 def Servo_Low():
     send_int(Constants.Servo_Turn_Down_Code)
     
+def Flash_On():
+    send_int(Constants.Flash_On_Code)
+    
+def Flash_Off(): 
+    send_int(Constants.Flash_Off_Code)
 
     
     
@@ -50,7 +55,7 @@ def Gas():
             return received_number
         else:
             print(f"Received invalid gas data: '{received_string}'")
-            return 0
+            return int(received_string)  # Return the string as an integer
     else:
         print("No gas data received from Arduino.")
         return 0

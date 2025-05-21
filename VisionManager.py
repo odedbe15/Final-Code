@@ -12,11 +12,11 @@ model = YOLO("v7_yolo8.pt")
 #פעולה המצלמת את התמונה הראשונה ובודקת אם יש צורך לצלם עוד
 def Take_First_Picture(id, time):
     detection_flag = False
-    SerialMessenger.send_int(6)
+    SerialMessenger.Flash_On()
     cap = cv2.VideoCapture(0)
     ret, frame = cap.read()
     result = model.predict(frame, conf =0.3)
-    SerialMessenger.send_int(7)
+    SerialMessenger.Flash_Off()
     cap.release()
     annotated_frame = result[0].plot()
     
