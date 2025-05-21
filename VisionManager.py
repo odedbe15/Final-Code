@@ -78,7 +78,7 @@ def Take_Picture(number, time,id):
     if class_count["Big Pest"] != 0:
         SerialMessenger.Buzz()
         
-    cv2.imwrite(str(time) + " " +str(id)+ " Number " +str(number) +".png", annotated_frame)
+    cv2.imwrite("data/" + str(time) + " " +str(id)+ " Number " +str(number) +".png", annotated_frame)
     print("Saved image:", str(time) + " " +str(id)+ " Number " +str(number) +".png")
     return
     
