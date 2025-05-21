@@ -57,7 +57,7 @@ def are_local_files():
             print("No Local Files Detected, Moving On") 
         else:    
             files = os.listdir("data")
-            sorted_files = sorted(files, key=lambda x: os.path.getmtime(os.path.join("data", x)))
+            sorted_files = sorted(files, key=lambda x: x.lower())
             for file in sorted_files:
                 print(file)#TODO debugging
                 if file.endswith(".json"):
