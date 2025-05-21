@@ -68,7 +68,7 @@ def Get_Location():
         str = gpsSerial.readline().decode().strip()
     except Exception as e:
         print("Error reading from GPS serial:", e)
-        return None
+        return [0,0]
     
     if str.find("GGA") > 0:
         try:
@@ -77,10 +77,10 @@ def Get_Location():
             Lat = msg.latitude
             Long = msg.longitude
             print("Lat:", Lat, "Long:", Long)
-            return Lat, Long
+            return [Lat, Long]
         except Exception as e:
             print("Error parsing NMEA message:", e)
-            return (random.random() * random.randrange(0,40), random.random()* random.randrange(0,40))
+            return [random.random() * random.randrange(0,40), random.random()* random.randrange(0,40)]
     
     
 
