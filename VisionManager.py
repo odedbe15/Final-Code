@@ -78,6 +78,8 @@ def Take_Picture(number, time):
         SerialMessenger.Buzz()
         
     cv2.imwrite(str(time) + " " +str(id)+ " Number " +str(number) +".png", annotated_frame)
+    print("Saved image:", str(time) + " " +str(id)+ " Number " +str(number) +".png")
+    return
     
     
     
