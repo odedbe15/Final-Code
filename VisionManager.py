@@ -4,7 +4,8 @@ from ultralytics import YOLO
 import cv2
 import os
 import SerialMessenger
-import time as clock
+import random
+
 #הגדרת המודל
 model = YOLO("v7_yolo8.pt") 
 
@@ -41,7 +42,7 @@ def Take_First_Picture(id, time):
     
     if detection_flag:
 
-        cv2.imwrite("data/" + str(time) + " " +str(id)+ str(clock.gmtime())+ " Number 1"+".png", annotated_frame)
+        cv2.imwrite("data/" + str(time) + " " +str(id)+ str(random.random())+ " Number 1"+".png", annotated_frame)
         SerialMessenger.Servo_Low()
         
         Take_Picture(2,time,id)
@@ -78,7 +79,7 @@ def Take_Picture(number, time,id):
     if class_count["Big Pest"] != 0:
         SerialMessenger.Buzz()
         
-    cv2.imwrite("data/" + str(time) + str(clock.gmtime())+ " " +str(id) + " Number " +str(number) +".png", annotated_frame)
+    cv2.imwrite("data/" + str(time) + str(random.random())+ " " +str(id) + " Number " +str(number) +".png", annotated_frame)
     print("Saved image:", str(time) + " " +str(id)+ " Number " +str(number) +".png")
     return
     
