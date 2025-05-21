@@ -11,6 +11,7 @@ model = YOLO("v7_yolo8.pt")
 
 #פעולה המצלמת את התמונה הראשונה ובודקת אם יש צורך לצלם עוד
 def Take_First_Picture(id, time):
+    SerialMessenger.Servo_High()
     detection_flag = False
     SerialMessenger.Flash_On()
     cap = cv2.VideoCapture(0)
@@ -27,7 +28,7 @@ def Take_First_Picture(id, time):
         for i in range(len(detections.cls)):
             class_id = int(detections.cls[i].item())
             confidence = detections.conf[i].item()
-            if confidence >- 0.5:
+            if confidence >- 0.3:
                 detection_flag = True
                 class_name = result[0].names[class_id]
                 class_count[class_name] +=1
@@ -36,14 +37,14 @@ def Take_First_Picture(id, time):
     #     SerialMessenger.Buzz()
         
                 
-    print( class_count)#TODO debugging
+    print(class_count)#TODO debugging
     
     if detection_flag:
 
-        cv2.imwrite(str(time) + " " +str(id)+ " Number 1"+".png", annotated_frame)
-        SerialMessenger.Servo_High()
-        Take_Picture(2,time)
+        cv2.imwrite("data/" + str(time) + " " +str(id)+ " Number 1"+".png", annotated_frame)
         SerialMessenger.Servo_Low()
+        Take_Picture(2,time)
+        SerialMessenger.Servo_Middle()
         Take_Picture(3,time)
     else:
         return
