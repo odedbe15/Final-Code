@@ -63,6 +63,7 @@ def Gas():
     
 
 def Get_Location():
+    print("Getting location")
     str = ''
     try:
         str = gpsSerial.readline().decode().strip()
@@ -71,11 +72,13 @@ def Get_Location():
         return [0,0]
     
     if str.find("GGA") > 0:
+        print("GGA found")
         try:
 
             msg = pynmea2.parse(str)
             Lat = msg.latitude
             Long = msg.longitude
+            print("Parsed NMEA message:", msg)
             print("Lat:", Lat, "Long:", Long)
             return [Lat, Long]
         except Exception as e:
