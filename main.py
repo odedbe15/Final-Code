@@ -64,13 +64,16 @@ def are_local_files():
                     Gas = dict["Gas"]
                     Date = dict["Date"]
                     try:
-                        database.child("Uploads").child(Date).child("Long").set(Location[0])
-                        database.child("Uploads").child(Date).child("Lat").set(Location[1])
+                        lat = dict["Location"][0]
+                        long = dict["Location"][1]
                     except:
                         print("Error uploading location data")
-                        database.child("Uploads").child(Date).child("Long").set(random.random() * random.randrange(0,40))
-                        database.child("Uploads").child(Date).child("Lat").set(random.random() * random.randrange(0,40))
-                        
+                        lat = random.random() * random.randrange(0,40)
+                        long = random.random() * random.randrange(0,40)
+                    
+                    database.child("Uploads").child(Date).child("Long").set(lat)
+                    database.child("Uploads").child(Date).child("Lat").set(long)
+                    
                     database.child("Uploads").child(Date).child("Gas").set(Gas)
                  
                 elif file.endswith(".png"):
