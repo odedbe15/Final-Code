@@ -55,7 +55,7 @@ def Gas():
             return received_number
         else:
             print(f"Received invalid gas data: '{received_string}'")
-            return int(received_string)  # Return the string as an integer
+            return float(received_string)  # Return the string as an integer
     else:
         print("No gas data received from Arduino.")
         return 0
