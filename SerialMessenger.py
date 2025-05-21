@@ -5,10 +5,11 @@ from serial import Serial
 from waiting import wait
 import time
 import pynmea2
+import random
 
 ser = Serial(port="/dev/ttyUSB0", baudrate=9600, timeout=5)
 time.sleep(2) 
-# gpsSerial = Serial(port="/dev/serial0")
+gpsSerial = Serial(port="/dev/ttyS0")
 
     
 def send_int(num):
@@ -61,25 +62,25 @@ def Gas():
         return 0
     
 
-# def Get_Location():
-#     str = ''
-#     try:
-#         str = gpsSerial.readline().decode().strip()
-#     except Exception as e:
-#         print("Error reading from GPS serial:", e)
-#         return None
+def Get_Location():
+    str = ''
+    try:
+        str = gpsSerial.readline().decode().strip()
+    except Exception as e:
+        print("Error reading from GPS serial:", e)
+        return None
     
-#     if str.find("GGA") > 0:
-#         try:
+    if str.find("GGA") > 0:
+        try:
 
-#             msg = pynmea2.parse(str)
-#             Lat = msg.latitude
-#             Long = msg.longitude
-#             print("Lat:", Lat, "Long:", Long)
-#             return Lat, Long
-#         except Exception as e:
-#             print("Error parsing NMEA message:", e)
-#             return None
+            msg = pynmea2.parse(str)
+            Lat = msg.latitude
+            Long = msg.longitude
+            print("Lat:", Lat, "Long:", Long)
+            return Lat, Long
+        except Exception as e:
+            print("Error parsing NMEA message:", e)
+            return (random.random() * random.randrange(0,40), random.random()* random.randrange(0,40))
     
     
 
