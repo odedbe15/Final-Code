@@ -33,8 +33,8 @@ def Take_First_Picture(id, time):
                 class_name = result[0].names[class_id]
                 class_count[class_name] +=1
                 
-    # if detections["Big Pest"] != 0:
-    #     SerialMessenger.Buzz()
+    if class_count["Big Pest"] != 0:
+        SerialMessenger.Buzz()
         
                 
     print(class_count)#TODO debugging
@@ -70,7 +70,7 @@ def Take_Picture(number, time):
                 class_name = result[0].names[class_id]
                 class_count[class_name] +=1
                 
-    if detections["Big Pest"] != 0:
+    if class_count["Big Pest"] != 0:
         SerialMessenger.Buzz()
         
     cv2.imwrite(str(time) + " " +str(id)+ " Number " +str(number) +".png", annotated_frame)
