@@ -40,7 +40,8 @@ def Flash_On():
     
 def Flash_Off(): 
     send_int(Constants.Flash_Off_Code)
-
+def Upload_Led():
+    send_int(Constants.Upload_Led_Code)
     
     
 def Gas():

@@ -58,6 +58,7 @@ def are_local_files():
         else:    
             files = os.listdir("data")
             for file in files:
+                SerialMessenger.Upload_Led()
                 print(file)#TODO debugging
                 if file.endswith(".json"):
                     dict = pickle.load(open("data/" + file, "rb"))
