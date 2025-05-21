@@ -43,14 +43,15 @@ def Take_First_Picture(id, time):
 
         cv2.imwrite("data/" + str(time) + " " +str(id)+ " Number 1"+".png", annotated_frame)
         SerialMessenger.Servo_Low()
-        Take_Picture(2,time)
+        
+        Take_Picture(2,time,id)
         SerialMessenger.Servo_Middle()
-        Take_Picture(3,time)
+        Take_Picture(3,time,id)
     else:
         return
         
 #פעולה המצלמת את התמונה השנייה והשלישית   
-def Take_Picture(number, time):
+def Take_Picture(number, time,id):
     SerialMessenger.Flash_On()
 
     cap = cv2.VideoCapture(0)
