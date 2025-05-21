@@ -57,8 +57,7 @@ def are_local_files():
             print("No Local Files Detected, Moving On") 
         else:    
             files = os.listdir("data")
-            sorted_files = sorted(files, key=lambda x: os.path.getmtime(os.path.join("data", x)))
-            for file in sorted_files:
+            for file in files:
                 print(file)#TODO debugging
                 if file.endswith(".json"):
                     dict = pickle.load(open("data/" + file, "rb"))

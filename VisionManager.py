@@ -51,11 +51,15 @@ def Take_First_Picture(id, time):
         
 #פעולה המצלמת את התמונה השנייה והשלישית   
 def Take_Picture(number, time):
+    SerialMessenger.Flash_On()
+
     cap = cv2.VideoCapture(0)
     ret, frame = cap.read()
     
     result = model.predict(frame, conf=0.3)
     cap.release()
+    SerialMessenger.Flash_Off()
+
     annotated_frame = result[0].plot()
 
     
