@@ -85,7 +85,7 @@ def Scan():
     SerialMessenger.Drive()
     time.sleep(2)
     SerialMessenger.Servo_High()
-    VisionManager.Take_First_Picture(scan_id,date.today())
+    VisionManager.Take_First_Picture(scan_id,str(date.today()))
     data = {"Gas": SerialMessenger.Gas(), "Location":SerialMessenger.Get_Location(), "Date":str(date.today()) + " " + str(scan_id)} 
     with open("data/data " +str(date.today()) + " " + str(scan_id) +".json",'xb') as outfile:
         pickle.dump(data,outfile)
