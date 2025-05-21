@@ -40,7 +40,7 @@ def Take_First_Picture(id, time):
     
     if detection_flag:
 
-        cv2.imwrite(time + " " +id+ " Number 1"+".png", annotated_frame)
+        cv2.imwrite(str(time) + " " +str(id)+ " Number 1"+".png", annotated_frame)
         SerialMessenger.Servo_High()
         Take_Picture(2,time)
         SerialMessenger.Servo_Low()
@@ -72,7 +72,7 @@ def Take_Picture(number, time):
     if detections["Big Pest"] != 0:
         SerialMessenger.Buzz()
         
-    cv2.imwrite(time + " " +id+ " Number " +number +".png", annotated_frame)
+    cv2.imwrite(str(time) + " " +str(id)+ " Number " +str(number) +".png", annotated_frame)
     
     
     

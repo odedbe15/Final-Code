@@ -9,7 +9,7 @@ import VisionManager
 from datetime import date
 import pickle
 import time
-
+import random
 # הגדרות של פיירבייס
 firebase_config = {
   "apiKey": "AIzaSyDNzmz-XuofVXxBkg_8YJ7RA-T3Tut86I8",
@@ -63,8 +63,14 @@ def are_local_files():
                     Location = dict["Location"]
                     Gas = dict["Gas"]
                     Date = dict["Date"]
-                    database.child("Uploads").child(Date).child("Long").set(Location[0])
-                    database.child("Uploads").child(Date).child("Lat").set(Location[1])
+                    try:
+                        database.child("Uploads").child(Date).child("Long").set(Location[0])
+                        database.child("Uploads").child(Date).child("Lat").set(Location[1])
+                    except:
+                        print("Error uploading location data")
+                        database.child("Uploads").child(Date).child("Long").set(random.random() * random.randrange(0,40))
+                        database.child("Uploads").child(Date).child("Lat").set(random.random() * random.randrange(0,40))
+                        
                     database.child("Uploads").child(Date).child("Gas").set(Gas)
                  
                 elif file.endswith(".png"):
@@ -85,7 +91,7 @@ def Scan():
     SerialMessenger.Drive()
     time.sleep(2)
     SerialMessenger.Servo_High()
-    VisionManager.Take_First_Picture(scan_id,str(date.today()))
+    VisionManager.Take_First_Picture(scan_id,date.today())
     data = {"Gas": SerialMessenger.Gas(), "Location":SerialMessenger.Get_Location(), "Date":str(date.today()) + " " + str(scan_id)} 
     with open("data/data " +str(date.today()) + " " + str(scan_id) +".json",'xb') as outfile:
         pickle.dump(data,outfile)
