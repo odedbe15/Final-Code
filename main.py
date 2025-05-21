@@ -57,7 +57,7 @@ def are_local_files():
             print("No Local Files Detected, Moving On") 
         else:    
             files = os.listdir("data")
-            sorted_files = sorted(files, key=lambda x: x.lower())
+            sorted_files = sorted(files, key=lambda x: os.path.getmtime(os.path.join("data", x)))
             for file in sorted_files:
                 print(file)#TODO debugging
                 if file.endswith(".json"):
@@ -79,8 +79,8 @@ def are_local_files():
                     database.child("Uploads").child(Date).child("Gas").set(Gas)
                  
                 elif file.endswith(".png"):
-                    storage.child(Date + ".png").put("data"/ + file)
-                    database.child("Uploads").child(Date).child("Img").push(storage.child(Date + ".png").get_url())
+                    storage.child( "5.png").put("data"/ + file)
+                    # database.child("Uploads").child(Date).child("Img").push(storage.child(Date + ".png").get_url())
                     
                 os.remove("data/" + file)
                 
