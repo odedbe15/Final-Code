@@ -79,8 +79,9 @@ def are_local_files():
                     database.child("Uploads").child(Date).child("Gas").set(Gas)
                  
                 elif file.endswith(".png"):
-                    storage.child( "5.png").put("data/" + file)
-                    # database.child("Uploads").child(Date).child("Img").push(storage.child(Date + ".png").get_url())
+                    Date = file.split(" ")[0] + " " + file.split(" ")[1]
+                    storage.child(Date +  ".png").put("data/" + file)
+                    database.child("Uploads").child(Date).child("Img").push(storage.child(Date + ".png").get_url())
                     
                 os.remove("data/" + file)
                 
