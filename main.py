@@ -103,6 +103,8 @@ def Scan():
 
 
 # התעוררת
+SerialMessenger.Flash_Off()
+
 if(is_connected()):
     are_local_files()
 ######################################
