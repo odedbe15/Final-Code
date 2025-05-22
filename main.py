@@ -94,8 +94,7 @@ def Scan():
     time.sleep(0.8)
     SerialMessenger.Drive()
     time.sleep(0.8)
-    SerialMessenger.Drive()
-    time.sleep(0.8)
+
     SerialMessenger.Servo_High()
     VisionManager.Take_First_Picture(scan_id,date.today())
     
