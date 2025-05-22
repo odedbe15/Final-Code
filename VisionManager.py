@@ -26,11 +26,17 @@ def Take_First_Picture(id, time,):
     detections = result[0].boxes
     class_count = {"Big Pest" : 0, "Healthy Leaves" : 0, "Sick Leaves" : 0}
     
-
+    pics = []
+    if detection_flag:
+        pic1_route = "data/" + str(time) + " " +str(id)+ str(random.random()).replace(".","_")+ " Number 1"+".png"
+        cv2.imwrite(pic1_route, annotated_frame)
+        SerialMessenger.Servo_Low()
+        pics = [pic1_route,Take_Picture(2,time,id),Take_Picture(3,time,id)]
+                
+        
     if detections is not None:
         
-        
-        data = {"Gas": SerialMessenger.Gas(), "Location":SerialMessenger.Get_Location(), "Date":str(date.today()) + " " + str(id)} 
+        data = {"Gas": SerialMessenger.Gas(), "Location":SerialMessenger.Get_Location(), "Date":str(date.today()) + " " + str(id), "Pics": pics} 
         with open("data/data " +str(date.today()) + " " + str(id) +".json",'xb') as outfile:
             pickle.dump(data,outfile)
         for i in range(len(detections.cls)):
@@ -47,16 +53,7 @@ def Take_First_Picture(id, time,):
                 
     print(class_count)#TODO debugging
     
-    if detection_flag:
 
-        cv2.imwrite("data/" + str(time) + " " +str(id)+ str(random.random()).replace(".","_")+ " Number 1"+".png", annotated_frame)
-        SerialMessenger.Servo_Low()
-        
-        Take_Picture(2,time,id)
-        SerialMessenger.Servo_Middle()
-        Take_Picture(3,time,id)
-    else:
-        return
 
 #פעולה המצלמת את התמונה השנייה והשלישית   
 def Take_Picture(number, time,id):
@@ -86,9 +83,11 @@ def Take_Picture(number, time,id):
     if class_count["Big Pest"] != 0:
         SerialMessenger.Buzz()
         
-    cv2.imwrite("data/" + str(time) + str(random.random()).replace(".","_")+ " " +str(id) + " Number " +str(number) +".png", annotated_frame)
+    pic_route = "data/" + str(time) + str(random.random()).replace(".","_")+ " " +str(id) + " Number " +str(number) +".png"
+    cv2.imwrite(pic_route, annotated_frame)
     print("Saved image:", str(time) + " " +str(id)+ " Number " +str(number) +".png")
-    return
+    SerialMessenger.Servo_Middle()
+    return pic_route
     
     
     

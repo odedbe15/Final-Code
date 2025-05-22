@@ -65,6 +65,7 @@ def are_local_files():
                     Location = dict["Location"]
                     Gas = dict["Gas"]
                     Date = dict["Date"]
+                    pics = dict["Pics"]
                     try:
                         lat = dict["Location"][0]
                         long = dict["Location"][1]
@@ -77,11 +78,15 @@ def are_local_files():
                     database.child("Uploads").child(Date).child("Lat").set(long)
                     
                     database.child("Uploads").child(Date).child("Gas").set(Gas)
+                    for x in range(len(pics)):
+                        if pics[x] != "":
+                            storage.child(Date + " " + str(x) + ".png").put(pics[x])
+                            database.child("Uploads").child(Date).child("Img").push(storage.child(Date + " " + str(x) + ".png").get_url("hGfCMCZWsoSH4dMGPezut7GqaYU2"))
                  
-                elif file.endswith(".png"):
-                    Date = file.split(" ")[0] + " " + file.split(" ")[1]
-                    storage.child(Date +  ".png").put("data/" + file)
-                    database.child("Uploads").child(Date).child("Img").push(storage.child(Date + ".png").get_url("hGfCMCZWsoSH4dMGPezut7GqaYU2"))
+                # elif file.endswith(".png"):
+                #     Date = file.split(" ")[0] + " " + file.split(" ")[1]
+                #     storage.child(Date +  ".png").put("data/" + file)
+                #     database.child("Uploads").child(Date).child("Img").push(storage.child(Date + ".png").get_url("hGfCMCZWsoSH4dMGPezut7GqaYU2"))
                     
                 os.remove("data/" + file)
                 
