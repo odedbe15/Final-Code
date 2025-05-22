@@ -26,25 +26,20 @@ def Take_First_Picture(id, time,):
     detections = result[0].boxes
     class_count = {"Big Pest" : 0, "Healthy Leaves" : 0, "Sick Leaves" : 0}
     
-    print(class_count)#TODO debugging
 
     if detections is not None:
         
         
-        if class_count["Healthy Leaves"]:
-            print("Healthy Leaves Detected, no need to take more pictures")
-        
-        if class_count["Sick Leaves"] != 0:
-            data = {"Gas": SerialMessenger.Gas(), "Location":SerialMessenger.Get_Location(), "Date":str(date.today()) + " " + str(id)} 
-            with open("data/data " +str(date.today()) + " " + str(id) +".json",'xb') as outfile:
-                pickle.dump(data,outfile)
-            for i in range(len(detections.cls)):
-                class_id = int(detections.cls[i].item())
-                confidence = detections.conf[i].item()
-                if confidence >- 0.3:
-                    detection_flag = True
-                    class_name = result[0].names[class_id]
-                    class_count[class_name] +=1
+        data = {"Gas": SerialMessenger.Gas(), "Location":SerialMessenger.Get_Location(), "Date":str(date.today()) + " " + str(id)} 
+        with open("data/data " +str(date.today()) + " " + str(id) +".json",'xb') as outfile:
+            pickle.dump(data,outfile)
+        for i in range(len(detections.cls)):
+            class_id = int(detections.cls[i].item())
+            confidence = detections.conf[i].item()
+            if confidence >- 0.3:
+                detection_flag = True
+                class_name = result[0].names[class_id]
+                class_count[class_name] +=1
                 
         if class_count["Big Pest"] != 0:
             SerialMessenger.Buzz()
