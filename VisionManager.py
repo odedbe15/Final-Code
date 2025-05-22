@@ -5,13 +5,14 @@ import cv2
 import os
 import SerialMessenger
 import random
-
+import pickle
+from datetime import date
 #הגדרת המודל
 model = YOLO("v7_yolo8.pt") 
 
 
 #פעולה המצלמת את התמונה הראשונה ובודקת אם יש צורך לצלם עוד
-def Take_First_Picture(id, time):
+def Take_First_Picture(id, time,):
     SerialMessenger.Servo_High()
     detection_flag = False
     SerialMessenger.Flash_On()
@@ -26,6 +27,9 @@ def Take_First_Picture(id, time):
     class_count = {"Big Pest" : 0, "Healthy Leaves" : 0, "Sick Leaves" : 0}
 
     if detections is not None:
+        data = {"Gas": SerialMessenger.Gas(), "Location":SerialMessenger.Get_Location(), "Date":str(date.today()) + " " + str(id)} 
+        with open("data/data " +str(date.today()) + " " + str(id) +".json",'xb') as outfile:
+            pickle.dump(data,outfile)
         for i in range(len(detections.cls)):
             class_id = int(detections.cls[i].item())
             confidence = detections.conf[i].item()
