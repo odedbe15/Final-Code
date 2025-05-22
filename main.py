@@ -91,11 +91,11 @@ def are_local_files():
 scan_id = 0                
 def Scan():
     SerialMessenger.Drive()
-    time.sleep(2)
+    time.sleep(0.8)
     SerialMessenger.Drive()
-    time.sleep(2)
+    time.sleep(0.8)
     SerialMessenger.Drive()
-    time.sleep(2)
+    time.sleep(0.8)
     SerialMessenger.Servo_High()
     VisionManager.Take_First_Picture(scan_id,date.today())
     data = {"Gas": SerialMessenger.Gas(), "Location":SerialMessenger.Get_Location(), "Date":str(date.today()) + " " + str(scan_id)} 
