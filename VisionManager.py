@@ -18,7 +18,7 @@ def Take_First_Picture(id, time,):
     SerialMessenger.Flash_On()
     cap = cv2.VideoCapture(0)
     ret, frame = cap.read()
-    result = model.predict(frame, conf =0.3)
+    result = model.predict(frame, conf =0)
     SerialMessenger.Flash_Off()
     cap.release()
     annotated_frame = result[0].plot()
@@ -36,7 +36,7 @@ def Take_First_Picture(id, time,):
         for i in range(len(detections.cls)):
             class_id = int(detections.cls[i].item())
             confidence = detections.conf[i].item()
-            if confidence >- 0.3:
+            if confidence >- 0:
                 detection_flag = True
                 class_name = result[0].names[class_id]
                 class_count[class_name] +=1
